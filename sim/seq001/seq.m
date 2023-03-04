@@ -1,3 +1,4 @@
+% PATH define
 currentFolder = pwd;
 modelFolder = fullfile(currentFolder,"..","..");
 
