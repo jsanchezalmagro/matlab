@@ -12,4 +12,4 @@ class Diff_dec:
     def diff_dec(self, data_in):
         arr = np.array([1, 2, 3, 4, 5]) + Diff_dec.base
         print(Diff_dec.name)
-        return (arr+data_in)
+        return (arr+data_in)*33.67

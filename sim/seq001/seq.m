@@ -1,26 +1,23 @@
-
-HOME_PROJECT = "t:\matlab\";
-NAME_SEQ = "seq001";
-USER = getenv("USERS");
-
+currentFolder = pwd;
+modelFolder = fullfile(currentFolder,"..","..");
 
 % Add to MATLAB path:
-folder = fullfile(HOME_PROJECT, USER, 'sim', NAME_SEQ);
-addpath(folder);
+addpath(currentFolder);
 
 % Add to Python path:
-folder(1) = fullfile(HOME_PROJECT, USER,'model', 'diff_enc');
-folder(2) = fullfile(HOME_PROJECT, USER,'model', 'diff_dec');
+folders = [ fullfile(modelFolder, 'diff_enc'), ...
+            fullfile(modelFolder, 'diff_dec')];
+
 % Add to Python path to ps.sys.path:
 P = py.sys.path;
-for index = 1:length(folder)
-    if count(P,folder(index)) == 0
-        insert(P,int32(0),folder(index));
+for folder = folders
+    if count(P,folder) == 0
+        insert(P,int32(0),folder);
     end
 end
 
 % Load Python module
-clear classes
+%clear classes
 M_diff_enc = py.importlib.import_module('diff_enc');
 M_diff_dec = py.importlib.import_module('diff_dec');
 
