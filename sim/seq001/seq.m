@@ -1,7 +1,7 @@
 
 HOME_PROJECT = "t:\matlab\";
 NAME_SEQ = "seq001";
-USER = getenv("USERS")
+USER = getenv("USERS");
 
 
 % Add to MATLAB path:
