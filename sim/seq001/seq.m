@@ -9,19 +9,14 @@ folder = fullfile(HOME_PROJECT, USER, 'sim', NAME_SEQ);
 addpath(folder);
 
 % Add to Python path:
-folder = fullfile(HOME_PROJECT, USER,'model', 'diff_enc');
-% Add to Python path:
+folder(1) = fullfile(HOME_PROJECT, USER,'model', 'diff_enc');
+folder(2) = fullfile(HOME_PROJECT, USER,'model', 'diff_dec');
+% Add to Python path to ps.sys.path:
 P = py.sys.path;
-if count(P,folder) == 0
-    insert(P,int32(0),folder);
-end
-
-% Add to Python path:
-folder = fullfile(HOME_PROJECT, USER,'model', 'diff_dec');
-% Add to Python path:
-P = py.sys.path;
-if count(P,folder) == 0
-    insert(P,int32(0),folder);
+for index = 1:length(folder)
+    if count(P,folder(index)) == 0
+        insert(P,int32(0),folder(index));
+    end
 end
 
 % Load Python module
@@ -45,5 +40,5 @@ enc = double(M_diff_enc.Diff_enc.diff_enc('m', pyvar))
 pyvar = py.numpy.array(enc);
 dec = double(M_diff_dec.Diff_dec.diff_dec('m', pyvar))
 
-diff_dec_int.init
-diff_enc_int.init
+%diff_dec_int.base
+%diff_enc_int.base
